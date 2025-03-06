@@ -23,15 +23,7 @@ function Header() {
 								<span>Home</span>
 							</a>
 						</li>
-						<li>
-							<a
-								href="#"
-								className="hover:text-primary-200 flex items-center space-x-1 font-medium"
-							>
-								<i className="fas fa-th-large"></i>
-								<span>Templates</span>
-							</a>
-						</li>
+
 						<li>
 							<a
 								href="#"
