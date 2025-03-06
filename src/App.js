@@ -10,6 +10,7 @@ import {
 	MinimalTemplate,
 } from "./components/ResumePreview";
 import StyleControls from "./components/StyleControls";
+import TemplateSelector from "./components/TemplateSelector";
 
 function App() {
 	const [resumeData, setResumeData] = useState({
@@ -139,8 +140,9 @@ function App() {
 	const [headingColor, setHeadingColor] = useState("#2563eb");
 	const [accentColor, setAccentColor] = useState("#60a5fa");
 	const [isPreviewMode, setIsPreviewMode] = useState(false);
-	const [isTwoColumn, setIsTwoColumn] = useState(true);
-	const [originalTemplate, setOriginalTemplate] = useState("modern");
+	const [isTwoColumn, setIsTwoColumn] = useState(false); // For layout of the editor
+	const [previousTemplate, setPreviousTemplate] = useState(null); // Store previous template when switching to two-column
+	const [isTemplateSelectorOpen, setIsTemplateSelectorOpen] = useState(false);
 
 	const resumeRef = useRef();
 
@@ -178,6 +180,12 @@ function App() {
 	};
 
 	const handleTemplateChange = (template) => {
+		// If switching to two-column template, store the previous one
+		if (template === "two-column") {
+			setPreviousTemplate(
+				activeTemplate !== "two-column" ? activeTemplate : "modern"
+			);
+		}
 		setActiveTemplate(template);
 	};
 
@@ -199,15 +207,21 @@ function App() {
 		}
 	};
 
-	const toggleTwoColumnResume = () => {
+	// Toggle between two-column template and the previous template
+	const toggleTwoColumnTemplate = () => {
 		if (activeTemplate === "two-column") {
-			// Switch back to the original template
-			setActiveTemplate(originalTemplate);
+			// Switch back to the previous template
+			setActiveTemplate(previousTemplate || "modern");
 		} else {
 			// Store current template and switch to two-column
-			setOriginalTemplate(activeTemplate);
+			setPreviousTemplate(activeTemplate);
 			setActiveTemplate("two-column");
 		}
+	};
+
+	// This toggles the layout of the editor (form and preview side by side or stacked)
+	const toggleEditorLayout = () => {
+		setIsTwoColumn(!isTwoColumn);
 	};
 
 	return (
@@ -225,37 +239,45 @@ function App() {
 										? "bg-primary-600 text-white shadow-md"
 										: "bg-white text-secondary-800 hover:bg-secondary-100"
 								}`}
-								onClick={() => setIsTwoColumn(!isTwoColumn)}
+								onClick={toggleEditorLayout}
 							>
 								<i
 									className={`fas fa-${
 										isTwoColumn ? "columns" : "align-justify"
 									}`}
 								></i>
-								<span>{isTwoColumn ? "Single Column" : "Two Columns"}</span>
+								<span>
+									{isTwoColumn ? "Single Column Editor" : "Two Column Editor"}
+								</span>
+							</button>
+
+							<button
+								className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 bg-white text-secondary-800 hover:bg-secondary-100`}
+								onClick={() => setIsTemplateSelectorOpen(true)}
+							>
+								<i className="fas fa-file-alt"></i>
+								<span>Change Template</span>
 							</button>
 						</>
 					)}
 
 					<div className="flex-grow"></div>
 
-					{isPreviewMode && (
-						<button
-							className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
-								activeTemplate === "two-column"
-									? "bg-primary-600 text-white shadow-md"
-									: "bg-white text-secondary-800 hover:bg-secondary-100"
-							}`}
-							onClick={toggleTwoColumnResume}
-						>
-							<i className="fas fa-columns"></i>
-							<span>
-								{activeTemplate === "two-column"
-									? "Standard Layout"
-									: "Two Column Layout"}
-							</span>
-						</button>
-					)}
+					<button
+						className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
+							activeTemplate === "two-column"
+								? "bg-primary-600 text-white shadow-md"
+								: "bg-white text-secondary-800 hover:bg-secondary-100"
+						}`}
+						onClick={toggleTwoColumnTemplate}
+					>
+						<i className="fas fa-columns"></i>
+						<span>
+							{activeTemplate === "two-column"
+								? "Standard Layout"
+								: "Two Column Layout"}
+						</span>
+					</button>
 
 					<button
 						onClick={() => setIsPreviewMode(!isPreviewMode)}
@@ -274,10 +296,36 @@ function App() {
 					</button>
 				</div>
 
+				{/* Template Selector Modal */}
+				{isTemplateSelectorOpen && (
+					<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+						<div className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+							<div className="p-6">
+								<div className="flex justify-between items-center mb-4">
+									<h2 className="text-2xl font-bold">Choose a Template</h2>
+									<button
+										onClick={() => setIsTemplateSelectorOpen(false)}
+										className="text-gray-500 hover:text-gray-800"
+									>
+										<i className="fas fa-times text-xl"></i>
+									</button>
+								</div>
+								<TemplateSelector
+									activeTemplate={activeTemplate}
+									onTemplateSelect={(template) => {
+										handleTemplateChange(template);
+										setIsTemplateSelectorOpen(false);
+									}}
+								/>
+							</div>
+						</div>
+					</div>
+				)}
+
 				{/* Main Content */}
 				<div
 					className={`flex ${
-						isTwoColumn ? "flex-col md:flex-row" : "flex-col"
+						isTwoColumn && !isPreviewMode ? "flex-col md:flex-row" : "flex-col"
 					} gap-8 flex-grow ${isPreviewMode ? "justify-center" : ""}`}
 				>
 					{/* Form Panel */}
@@ -311,17 +359,15 @@ function App() {
 							)}
 							<div
 								className={`scroll-container ${
-									isPreviewMode ? "shadow-2xl" : ""
+									isPreviewMode ? "preview-mode" : ""
 								}`}
 							>
-								<ResumePreview
-									data={resumeData}
-									ref={resumeRef}
-									template={activeTemplate}
-									TemplateComponent={getTemplateComponent(activeTemplate)}
-									headingColor={headingColor}
-									accentColor={accentColor}
-								/>
+								{React.createElement(getTemplateComponent(activeTemplate), {
+									data: resumeData,
+									ref: resumeRef,
+									headingColor: headingColor,
+									accentColor: accentColor,
+								})}
 							</div>
 						</div>
 					</div>

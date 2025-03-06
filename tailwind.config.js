@@ -58,6 +58,17 @@ module.exports = {
 					"100%": { transform: "translateY(0)", opacity: "1" },
 				},
 			},
+			gridTemplateColumns: {
+				"2-col": "1fr 1fr",
+				resume: "1fr 2fr",
+				sidebar: "minmax(250px, 1fr) 3fr",
+			},
+			gridTemplateRows: {
+				resume: "auto 1fr auto",
+			},
+			gap: {
+				resume: "1.5rem",
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/forms")],
