@@ -10,6 +10,7 @@ import {
 	TwoColumnTemplate,
 	MinimalTemplate,
 } from "./components/ResumePreview";
+import StyleControls from "./components/StyleControls";
 
 function App() {
 	const [resumeData, setResumeData] = useState({
@@ -84,6 +85,8 @@ function App() {
 	const [activeTemplate, setActiveTemplate] = useState("modern");
 	const [showTemplateSelector, setShowTemplateSelector] = useState(false);
 	const [activeSidebar, setActiveSidebar] = useState("form"); // "form" or "templates"
+	const [headingColor, setHeadingColor] = useState("#2563eb");
+	const [accentColor, setAccentColor] = useState("#60a5fa");
 
 	const resumeRef = useRef();
 
@@ -123,6 +126,11 @@ function App() {
 	const handleTemplateChange = (template) => {
 		setActiveTemplate(template);
 		setShowTemplateSelector(false);
+	};
+
+	const handlePresetSelect = (preset) => {
+		setHeadingColor(preset.headingColor);
+		setAccentColor(preset.accentColor);
 	};
 
 	const getTemplateComponent = (template) => {
@@ -197,18 +205,19 @@ function App() {
 					{/* Right Panel (Preview) */}
 					<div className="w-full md:w-1/2 animate-fade">
 						<div className="sticky top-24">
-							<div className="bg-white rounded-md p-4 shadow-card mb-4">
-								<h2 className="text-lg font-semibold text-secondary-800 flex items-center">
-									<i className="fas fa-eye mr-2 text-primary-600"></i>
-									Resume Preview
-								</h2>
-							</div>
+							<StyleControls
+								headingColor={headingColor}
+								onHeadingColorChange={setHeadingColor}
+								onPresetSelect={handlePresetSelect}
+							/>
 							<div className="scroll-container">
 								<ResumePreview
 									data={resumeData}
 									ref={resumeRef}
 									template={activeTemplate}
 									TemplateComponent={getTemplateComponent(activeTemplate)}
+									headingColor={headingColor}
+									accentColor={accentColor}
 								/>
 							</div>
 						</div>
