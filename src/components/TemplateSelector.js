@@ -14,17 +14,24 @@ const templates = [
 		description: "Traditional resume layout that works for all industries",
 	},
 	{
-		id: "creative",
-		name: "Creative",
+		id: "two-column",
+		name: "Two Column",
 		thumbnail:
-			"https://via.placeholder.com/150x200/7e22ce/FFFFFF?text=Creative",
-		description: "Stand out with this creative design for artistic fields",
+			"https://via.placeholder.com/150x200/047857/FFFFFF?text=Two+Column",
+		description: "Efficient space usage with a clear separation of sections",
 	},
 	{
 		id: "minimal",
 		name: "Minimal",
 		thumbnail: "https://via.placeholder.com/150x200/0f172a/FFFFFF?text=Minimal",
-		description: "Simple and clean with focus on content",
+		description: "Clean and centered design with elegant typography",
+	},
+	{
+		id: "creative",
+		name: "Creative",
+		thumbnail:
+			"https://via.placeholder.com/150x200/7e22ce/FFFFFF?text=Creative",
+		description: "Stand out with this creative design for artistic fields",
 	},
 	{
 		id: "professional",

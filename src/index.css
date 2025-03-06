@@ -14,11 +14,32 @@ body {
 .resume-page {
 	width: 21cm;
 	min-height: 29.7cm;
-	padding: 2cm;
-	margin: 1cm auto;
+	padding: 1cm;
+	margin: 0.25cm auto;
 	background: white;
 	box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 	max-width: 100%;
+}
+
+/* Add these new styles */
+.scroll-container {
+	height: calc(100vh - 180px); /* Adjust based on header/footer height */
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.scroll-container::-webkit-scrollbar {
+	width: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
 }
 
 @media print {
@@ -28,10 +49,72 @@ body {
 	body {
 		margin: 0;
 		padding: 0;
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		width: 210mm;
+		font-family: "Open Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+		-webkit-font-smoothing: subpixel-antialiased;
 	}
 	.resume-page {
-		width: 100%;
+		width: 210mm !important;
+		min-height: auto !important;
+		height: auto !important;
 		box-shadow: none;
-		margin: 0;
+		margin: 0 !important;
+		padding: 1cm;
+		break-inside: avoid;
+		transform: none !important;
+		font-size: 11pt;
+		line-height: 1.5;
+		font-family: "Open Sans", sans-serif;
 	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: "Merriweather", serif !important;
+		margin-bottom: 0.5em;
+	}
+	p,
+	span,
+	div {
+		font-family: "Lato", sans-serif !important;
+		line-height: 1.6;
+	}
+	.scroll-container {
+		height: auto !important;
+		overflow: visible !important;
+	}
+	h1 {
+		font-size: 18pt !important;
+	}
+	h2 {
+		font-size: 14pt !important;
+	}
+	h3 {
+		font-size: 12pt !important;
+	}
+	p,
+	span {
+		font-size: 11pt !important;
+	}
+	.text-sm {
+		font-size: 10pt !important;
+	}
+	.text-xs {
+		font-size: 9pt !important;
+	}
+}
+
+/* Resume specific font styles */
+.resume-heading {
+	@apply font-heading tracking-tight;
+}
+
+.resume-body {
+	@apply font-body leading-relaxed;
+}
+
+.resume-details {
+	@apply font-sans text-sm leading-normal;
 }

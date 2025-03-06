@@ -4,6 +4,12 @@ import ResumeForm from "./components/ResumeForm";
 import ResumePreview from "./components/ResumePreview";
 import TemplateSelector from "./components/TemplateSelector";
 import { useReactToPrint } from "react-to-print";
+import {
+	ClassicTemplate,
+	ModernTemplate,
+	TwoColumnTemplate,
+	MinimalTemplate,
+} from "./components/ResumePreview";
 
 function App() {
 	const [resumeData, setResumeData] = useState({
@@ -84,6 +90,30 @@ function App() {
 	const handlePrint = useReactToPrint({
 		content: () => resumeRef.current,
 		documentTitle: `${resumeData.personalInfo.name || "Resume"}_CV`,
+		pageStyle: `
+			@page {
+				size: A4;
+				margin: 0.5cm;
+			}
+			html, body {
+				width: 210mm;
+				height: 297mm;
+			}
+		`,
+		onBeforeGetContent: () => {
+			const element = resumeRef.current;
+			if (element) {
+				element.style.transform = "none";
+				element.style.height = "auto";
+			}
+		},
+		onAfterPrint: () => {
+			const element = resumeRef.current;
+			if (element) {
+				element.style.transform = "";
+				element.style.height = "";
+			}
+		},
 	});
 
 	const updateResumeData = (newData) => {
@@ -93,6 +123,19 @@ function App() {
 	const handleTemplateChange = (template) => {
 		setActiveTemplate(template);
 		setShowTemplateSelector(false);
+	};
+
+	const getTemplateComponent = (template) => {
+		switch (template) {
+			case "modern":
+				return ModernTemplate;
+			case "two-column":
+				return TwoColumnTemplate;
+			case "minimal":
+				return MinimalTemplate;
+			default:
+				return ClassicTemplate;
+		}
 	};
 
 	return (
@@ -140,7 +183,7 @@ function App() {
 				{/* Main Content */}
 				<div className="flex flex-col md:flex-row gap-8 flex-grow">
 					{/* Left Panel (Form or Templates) */}
-					<div className="w-full md:w-1/2 animate-fade">
+					<div className="w-full md:w-1/2 animate-fade scroll-container">
 						{activeSidebar === "form" ? (
 							<ResumeForm data={resumeData} updateData={updateResumeData} />
 						) : (
@@ -160,11 +203,12 @@ function App() {
 									Resume Preview
 								</h2>
 							</div>
-							<div className="overflow-auto max-w-full">
+							<div className="scroll-container">
 								<ResumePreview
 									data={resumeData}
 									ref={resumeRef}
 									template={activeTemplate}
+									TemplateComponent={getTemplateComponent(activeTemplate)}
 								/>
 							</div>
 						</div>

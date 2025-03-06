@@ -35,8 +35,9 @@ module.exports = {
 				danger: "#ef4444",
 			},
 			fontFamily: {
-				sans: ["Inter", "sans-serif"],
-				heading: ["Montserrat", "sans-serif"],
+				sans: ["Open Sans", "Roboto", "sans-serif"],
+				heading: ["Merriweather", "serif"],
+				body: ["Lato", "sans-serif"],
 			},
 			boxShadow: {
 				card: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
