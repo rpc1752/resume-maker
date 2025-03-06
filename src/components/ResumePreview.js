@@ -4,18 +4,18 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 	return (
 		<div className="bg-white shadow-md rounded">
 			<div ref={ref} className="resume-page p-2">
-				<header className="border-b-2 border-gray-300 pb-2 mb-2">
+				<header className="border-b border-gray-300 pb-1 mb-1">
 					<h1
-						className="text-3xl font-heading font-bold tracking-tight"
+						className="text-2xl font-heading font-bold leading-tight"
 						style={{ color: headingColor }}
 					>
 						{data.personalInfo.name || "Your Name"}
 					</h1>
-					<p className="text-lg font-body text-gray-700">
+					<p className="text-base font-body text-gray-700 leading-snug">
 						{data.personalInfo.title || "Your Job Title"}
 					</p>
 
-					<div className="mt-2 flex flex-wrap resume-details text-gray-600">
+					<div className="mt-1 flex flex-wrap resume-details text-sm text-gray-600 leading-tight">
 						{data.personalInfo.email && (
 							<div className="mr-4 mb-2">
 								<span className="font-semibold">Email:</span>{" "}
@@ -44,34 +44,42 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 				</header>
 
 				{data.objective && (
-					<section className="mb-6">
+					<section className="mb-2">
 						<h2
-							className="text-xl font-bold mb-3"
+							className="text-lg font-bold mb-1 leading-tight"
 							style={{ color: headingColor }}
 						>
 							Career Objective
 						</h2>
-						<p className="text-gray-700">{data.objective}</p>
+						<p className="text-sm text-gray-700 leading-snug">
+							{data.objective}
+						</p>
 					</section>
 				)}
 
 				{data.education.length > 0 && (
-					<section className="mb-6">
+					<section className="mb-2">
 						<h2
-							className="text-xl font-bold mb-3"
+							className="text-lg font-bold mb-1 leading-tight"
 							style={{ color: headingColor }}
 						>
 							Education
 						</h2>
 						{data.education.map((edu, index) => (
-							<div key={index} className="mb-4">
+							<div key={index} className="mb-2">
 								<div className="flex flex-wrap justify-between">
-									<h3 className="text-lg font-semibold">{edu.degree}</h3>
-									<span className="text-gray-600">{edu.year}</span>
+									<h3 className="text-base font-semibold leading-tight">
+										{edu.degree}
+									</h3>
+									<span className="text-sm text-gray-600">{edu.year}</span>
 								</div>
-								<p className="text-gray-700">{edu.school}</p>
+								<p className="text-sm text-gray-700 leading-snug">
+									{edu.school}
+								</p>
 								{edu.description && (
-									<p className="text-gray-600 mt-1">{edu.description}</p>
+									<p className="text-sm text-gray-600 mt-0.5 leading-snug">
+										{edu.description}
+									</p>
 								)}
 							</div>
 						))}
@@ -79,22 +87,28 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 				)}
 
 				{data.experience.length > 0 && (
-					<section className="mb-6">
+					<section className="mb-2">
 						<h2
-							className="text-xl font-bold mb-3"
+							className="text-lg font-bold mb-1 leading-tight"
 							style={{ color: headingColor }}
 						>
 							Work Experience
 						</h2>
 						{data.experience.map((exp, index) => (
-							<div key={index} className="mb-4">
+							<div key={index} className="mb-2">
 								<div className="flex flex-wrap justify-between">
-									<h3 className="text-lg font-semibold">{exp.position}</h3>
-									<span className="text-gray-600">{exp.duration}</span>
+									<h3 className="text-base font-semibold leading-tight">
+										{exp.position}
+									</h3>
+									<span className="text-sm text-gray-600">{exp.duration}</span>
 								</div>
-								<p className="text-gray-700">{exp.company}</p>
+								<p className="text-sm text-gray-700 leading-snug">
+									{exp.company}
+								</p>
 								{exp.description && (
-									<p className="text-gray-600 mt-1">{exp.description}</p>
+									<p className="text-sm text-gray-600 mt-0.5 leading-snug">
+										{exp.description}
+									</p>
 								)}
 							</div>
 						))}
@@ -104,16 +118,16 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 				{data.skills.length > 0 && (
 					<section>
 						<h2
-							className="text-xl font-bold mb-3"
+							className="text-lg font-bold mb-1 leading-tight"
 							style={{ color: headingColor }}
 						>
 							Skills
 						</h2>
-						<div className="flex flex-wrap">
+						<div className="flex flex-wrap gap-1">
 							{data.skills.map((skill, index) => (
 								<span
 									key={index}
-									className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm mr-2 mb-2"
+									className="bg-blue-50 text-blue-800 px-2 py-0.5 rounded-full text-sm mb-1 mr-1"
 								>
 									{skill}
 								</span>

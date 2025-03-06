@@ -23,7 +23,7 @@ function App() {
 			address: "San Francisco, CA",
 		},
 		objective:
-			"Experienced full stack developer with over 5 years of experience building scalable web applications. Passionate about clean code, user experience, and solving complex problems with efficient solutions.",
+			"Experienced full stack developer with over 5 years of experience building scalable web applications. Passionate about clean code, user experience, and solving complex problems with efficient solutions.Experienced full stack developer with over 5 years of experience building scalable web applications. Passionate about clean code, user experience, and solving complex problems with efficient solutions.",
 		education: [
 			{
 				degree: "Master of Science in Computer Science",
@@ -46,14 +46,14 @@ function App() {
 				company: "TechInnovate Solutions",
 				duration: "2020 - Present",
 				description:
-					"Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily.",
+					"Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily.Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily",
 			},
 			{
 				position: "Full Stack Developer",
 				company: "DataViz Corp",
 				duration: "2018 - 2020",
 				description:
-					"Developed and maintained data visualization dashboards using React and D3.js. Optimized database queries resulting in 60% faster load times. Collaborated with UX team to improve user interface based on customer feedback.",
+					"Developed and maintained data visualization dashboards using React and D3.js. Optimized database queries resulting in 60% faster load times. Collaborated with UX team to improve user interface based on customer feedback.Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily",
 			},
 			{
 				position: "Web Development Intern",
