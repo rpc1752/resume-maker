@@ -16,66 +16,66 @@ function App() {
 	const [resumeData, setResumeData] = useState({
 		personalInfo: {
 			name: "Alex Johnson",
-			title: "Full Stack Developer",
+			title: "Senior Full Stack Developer & Tech Lead",
 			email: "alex.johnson@example.com",
 			phone: "(555) 123-4567",
 			website: "alexjohnson.dev",
-			address: "San Francisco, CA",
+			address: "San Francisco Bay Area",
 		},
 		objective:
-			"Experienced full stack developer with over 5 years of experience building scalable web applications. Passionate about clean code, user experience, and solving complex problems with efficient solutions.Experienced full stack developer with over 5 years of experience building scalable web applications. Passionate about clean code, user experience, and solving complex problems with efficient solutions.",
+			"Results-driven Full Stack Developer with a proven track record of architecting high-performance web applications. Skilled in leading agile teams and delivering innovative solutions that drive business growth. Known for optimizing development workflows and mentoring junior developers while staying at the forefront of emerging technologies.",
 		education: [
 			{
 				degree: "Master of Science in Computer Science",
 				school: "Stanford University",
 				year: "2018 - 2020",
 				description:
-					"Specialized in Artificial Intelligence and Machine Learning. GPA: 3.9/4.0",
+					"Focused on Advanced Software Architecture and AI Systems. Led research project on scalable microservices architecture. Published paper on distributed systems optimization. GPA: 3.9/4.0",
 			},
 			{
 				degree: "Bachelor of Science in Computer Engineering",
 				school: "University of California, Berkeley",
 				year: "2014 - 2018",
 				description:
-					"Dean's List for all semesters. Founded the Web Development Club.",
+					"Graduated with Honors (Top 5%). Founded and led the Web Innovation Lab with 50+ active members. Received Outstanding Technical Achievement Award for senior project on real-time data processing systems.",
 			},
 		],
 		experience: [
 			{
-				position: "Senior Full Stack Developer",
+				position: "Senior Full Stack Developer & Team Lead",
 				company: "TechInnovate Solutions",
 				duration: "2020 - Present",
 				description:
-					"Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily.Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily",
+					"Spearheaded the development of a revolutionary CRM platform serving 100+ enterprise clients. Architected microservices infrastructure that handles 1M+ daily transactions. Reduced system downtime by 99% through implementing advanced monitoring and auto-scaling solutions. Mentored 8 junior developers, with 3 receiving promotions within their first year.",
 			},
 			{
 				position: "Full Stack Developer",
 				company: "DataViz Corp",
 				duration: "2018 - 2020",
 				description:
-					"Developed and maintained data visualization dashboards using React and D3.js. Optimized database queries resulting in 60% faster load times. Collaborated with UX team to improve user interface based on customer feedback.Lead a team of 5 developers in building a customer relationship management platform. Implemented CI/CD pipelines reducing deployment time by 40%. Designed RESTful APIs serving over 10,000 requests daily",
+					"Revolutionized the company's data visualization platform using React and D3.js, resulting in a 200% increase in user engagement. Implemented advanced caching strategies that reduced average page load time from 3s to 300ms. Created a component library that reduced development time for new features by 60%. Successfully migrated legacy system to modern tech stack while maintaining 100% uptime.",
 			},
 			{
 				position: "Web Development Intern",
 				company: "StartUp Innovations",
 				duration: "Summer 2017",
 				description:
-					"Assisted in developing responsive web applications using HTML, CSS, and JavaScript. Participated in daily stand-ups and sprint planning sessions.",
+					"Developed key features for the company's flagship product using React and Node.js. Created an automated testing framework that reduced QA time by 40%. Contributed to the successful launch of 3 major product features that increased user retention by 25%.",
 			},
 		],
 		skills: [
-			"JavaScript",
-			"React.js",
-			"Node.js",
-			"TypeScript",
-			"MongoDB",
-			"PostgreSQL",
-			"Docker",
-			"AWS",
-			"GraphQL",
-			"CI/CD",
-			"Git",
-			"Agile Methodologies",
+			"JavaScript/TypeScript",
+			"React/Next.js",
+			"Node.js/Express",
+			"System Architecture",
+			"AWS/Cloud Infrastructure",
+			"MongoDB/PostgreSQL",
+			"Docker/Kubernetes",
+			"CI/CD Pipeline Design",
+			"Team Leadership",
+			"Performance Optimization",
+			"Microservices",
+			"Security Best Practices",
 		],
 		projects: [],
 		certifications: [],
