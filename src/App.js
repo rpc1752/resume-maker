@@ -139,7 +139,7 @@ function App() {
 	const [headingColor, setHeadingColor] = useState("#2563eb");
 	const [accentColor, setAccentColor] = useState("#60a5fa");
 	const [isPreviewMode, setIsPreviewMode] = useState(false);
-	const [isTwoColumn, setIsTwoColumn] = useState(false); // For layout of the editor
+	const [isTwoColumn, setIsTwoColumn] = useState(true); // For layout of the editor
 	const [previousTemplate, setPreviousTemplate] = useState(null); // Store previous template when switching to two-column
 
 	const resumeRef = useRef();
