@@ -118,3 +118,21 @@ body {
 .resume-details {
 	@apply font-sans text-sm leading-normal;
 }
+
+/* Preview mode styles */
+@media screen {
+	.scroll-container.preview-mode {
+		background-color: #f3f4f6;
+		padding: 2rem;
+		min-height: calc(100vh - 200px);
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+	}
+
+	.preview-mode .resume-page {
+		margin: 0 auto;
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+			0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	}
+}

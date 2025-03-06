@@ -2,7 +2,6 @@ import React, { useState, useRef } from "react";
 import Header from "./components/Header";
 import ResumeForm from "./components/ResumeForm";
 import ResumePreview from "./components/ResumePreview";
-import TemplateSelector from "./components/TemplateSelector";
 import { useReactToPrint } from "react-to-print";
 import {
 	ClassicTemplate,
@@ -137,10 +136,10 @@ function App() {
 	});
 
 	const [activeTemplate, setActiveTemplate] = useState("modern");
-	const [showTemplateSelector, setShowTemplateSelector] = useState(false);
-	const [activeSidebar, setActiveSidebar] = useState("form"); // "form" or "templates"
 	const [headingColor, setHeadingColor] = useState("#2563eb");
 	const [accentColor, setAccentColor] = useState("#60a5fa");
+	const [isPreviewMode, setIsPreviewMode] = useState(false);
+	const [isTwoColumn, setIsTwoColumn] = useState(true);
 
 	const resumeRef = useRef();
 
@@ -179,7 +178,6 @@ function App() {
 
 	const handleTemplateChange = (template) => {
 		setActiveTemplate(template);
-		setShowTemplateSelector(false);
 	};
 
 	const handlePresetSelect = (preset) => {
@@ -207,31 +205,35 @@ function App() {
 			<div className="container mx-auto px-4 py-6 flex-grow flex flex-col">
 				{/* Action Buttons */}
 				<div className="flex flex-wrap gap-3 mb-6">
-					<button
-						className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
-							activeSidebar === "form"
-								? "bg-primary-600 text-white shadow-md"
-								: "bg-white text-secondary-800 hover:bg-secondary-100"
-						}`}
-						onClick={() => setActiveSidebar("form")}
-					>
-						<i className="fas fa-edit"></i>
-						<span>Edit Resume</span>
-					</button>
-
-					<button
-						className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
-							activeSidebar === "templates"
-								? "bg-primary-600 text-white shadow-md"
-								: "bg-white text-secondary-800 hover:bg-secondary-100"
-						}`}
-						onClick={() => setActiveSidebar("templates")}
-					>
-						<i className="fas fa-th-large"></i>
-						<span>Templates</span>
-					</button>
+					{!isPreviewMode && (
+						<>
+							<button
+								className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
+									isTwoColumn
+										? "bg-primary-600 text-white shadow-md"
+										: "bg-white text-secondary-800 hover:bg-secondary-100"
+								}`}
+								onClick={() => setIsTwoColumn(!isTwoColumn)}
+							>
+								<i
+									className={`fas fa-${
+										isTwoColumn ? "columns" : "align-justify"
+									}`}
+								></i>
+								<span>{isTwoColumn ? "Single Column" : "Two Columns"}</span>
+							</button>
+						</>
+					)}
 
 					<div className="flex-grow"></div>
+
+					<button
+						onClick={() => setIsPreviewMode(!isPreviewMode)}
+						className="flex items-center space-x-2 bg-primary-500 hover:bg-primary-600 text-white font-bold py-2 px-4 rounded-md shadow transition-colors duration-200"
+					>
+						<i className={`fas fa-${isPreviewMode ? "edit" : "eye"}`}></i>
+						<span>{isPreviewMode ? "Edit Mode" : "Preview"}</span>
+					</button>
 
 					<button
 						onClick={handlePrint}
@@ -243,28 +245,45 @@ function App() {
 				</div>
 
 				{/* Main Content */}
-				<div className="flex flex-col md:flex-row gap-8 flex-grow">
-					{/* Left Panel (Form or Templates) */}
-					<div className="w-full md:w-1/2 animate-fade scroll-container">
-						{activeSidebar === "form" ? (
+				<div
+					className={`flex ${
+						isTwoColumn ? "flex-col md:flex-row" : "flex-col"
+					} gap-8 flex-grow ${isPreviewMode ? "justify-center" : ""}`}
+				>
+					{/* Form Panel */}
+					{!isPreviewMode && (
+						<div
+							className={`${
+								isTwoColumn ? "w-full md:w-1/2" : "w-full"
+							} animate-fade scroll-container`}
+						>
 							<ResumeForm data={resumeData} updateData={updateResumeData} />
-						) : (
-							<TemplateSelector
-								activeTemplate={activeTemplate}
-								onTemplateSelect={handleTemplateChange}
-							/>
-						)}
-					</div>
+						</div>
+					)}
 
-					{/* Right Panel (Preview) */}
-					<div className="w-full md:w-1/2 animate-fade">
-						<div className="sticky top-24">
-							<StyleControls
-								headingColor={headingColor}
-								onHeadingColorChange={setHeadingColor}
-								onPresetSelect={handlePresetSelect}
-							/>
-							<div className="scroll-container">
+					{/* Preview Panel */}
+					<div
+						className={`${
+							isPreviewMode
+								? "w-full max-w-[21cm]"
+								: isTwoColumn
+								? "w-full md:w-1/2"
+								: "w-full"
+						} animate-fade`}
+					>
+						<div className={`${isPreviewMode ? "" : "sticky top-24"}`}>
+							{!isPreviewMode && (
+								<StyleControls
+									headingColor={headingColor}
+									onHeadingColorChange={setHeadingColor}
+									onPresetSelect={handlePresetSelect}
+								/>
+							)}
+							<div
+								className={`scroll-container ${
+									isPreviewMode ? "shadow-2xl" : ""
+								}`}
+							>
 								<ResumePreview
 									data={resumeData}
 									ref={resumeRef}
