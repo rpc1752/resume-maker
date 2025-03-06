@@ -3,8 +3,8 @@ import React, { forwardRef } from "react";
 const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 	return (
 		<div className="bg-white shadow-md rounded">
-			<div ref={ref} className="resume-page p-2">
-				<header className="border-b border-gray-300 pb-1 mb-1">
+			<div ref={ref} className="resume-page p-6">
+				<header className="border-b border-gray-300 pb-3 mb-4">
 					<h1
 						className="text-2xl font-heading font-bold leading-tight"
 						style={{ color: headingColor }}
@@ -44,7 +44,7 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 				</header>
 
 				{data.objective && (
-					<section className="mb-2">
+					<section className="mb-4">
 						<h2
 							className="text-lg font-bold mb-1 leading-tight"
 							style={{ color: headingColor }}
@@ -143,8 +143,8 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 ResumePreview.displayName = "ResumePreview";
 
 const ModernTemplate = forwardRef(({ data, headingColor = "#2563eb" }, ref) => (
-	<div ref={ref} className="modern-template">
-		<header className="border-b-2 border-blue-600 pb-2 mb-4">
+	<div ref={ref} className="modern-template resume-page p-6">
+		<header className="border-b-2 border-blue-600 pb-3 mb-5">
 			<h1 className="text-2xl font-bold" style={{ color: headingColor }}>
 				{data.personalInfo.name || "Your Name"}
 			</h1>
@@ -180,7 +180,7 @@ const ModernTemplate = forwardRef(({ data, headingColor = "#2563eb" }, ref) => (
 		</header>
 
 		{data.objective && (
-			<section className="mb-4">
+			<section className="mb-5">
 				<h2 className="text-lg font-bold mb-1" style={{ color: headingColor }}>
 					Career Objective
 				</h2>
@@ -252,10 +252,10 @@ ModernTemplate.displayName = "ModernTemplate";
 
 const TwoColumnTemplate = forwardRef(
 	({ data, headingColor = "#2563eb" }, ref) => (
-		<div ref={ref} className="two-column-template bg-white p-6">
-			<div className="grid grid-cols-3 gap-6">
+		<div ref={ref} className="two-column-template resume-page p-6">
+			<div className="grid grid-cols-3 gap-8">
 				{/* Left Column */}
-				<div className="col-span-1 bg-gray-50 p-4 rounded-lg">
+				<div className="col-span-1 bg-gray-50 p-5 rounded-lg">
 					<div className="mb-6">
 						<h1
 							className="text-xl font-bold mb-1"
@@ -318,7 +318,7 @@ const TwoColumnTemplate = forwardRef(
 				</div>
 
 				{/* Right Column */}
-				<div className="col-span-2">
+				<div className="col-span-2 px-2">
 					{data.objective && (
 						<section className="mb-6">
 							<h2
@@ -394,8 +394,8 @@ const TwoColumnTemplate = forwardRef(
 
 const MinimalTemplate = forwardRef(
 	({ data, headingColor = "#2563eb" }, ref) => (
-		<div ref={ref} className="minimal-template bg-white p-8">
-			<header className="text-center mb-8">
+		<div ref={ref} className="minimal-template resume-page p-8">
+			<header className="text-center mb-10">
 				<h1
 					className="text-3xl font-light mb-2"
 					style={{ color: headingColor }}
@@ -417,7 +417,7 @@ const MinimalTemplate = forwardRef(
 			</header>
 
 			{data.objective && (
-				<section className="mb-8">
+				<section className="mb-10">
 					<p className="text-center text-gray-600 max-w-2xl mx-auto">
 						{data.objective}
 					</p>
@@ -425,7 +425,7 @@ const MinimalTemplate = forwardRef(
 			)}
 
 			{data.experience.length > 0 && (
-				<section className="mb-8">
+				<section className="mb-10">
 					<h2
 						className="text-xl font-light mb-4 text-center"
 						style={{ color: headingColor }}
@@ -451,7 +451,7 @@ const MinimalTemplate = forwardRef(
 			)}
 
 			{data.education.length > 0 && (
-				<section className="mb-8">
+				<section className="mb-10">
 					<h2
 						className="text-xl font-light mb-4 text-center"
 						style={{ color: headingColor }}

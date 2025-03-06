@@ -384,13 +384,13 @@ function App() {
 							)}
 							<div
 								className={`scroll-container ${
-									isPreviewMode ? "preview-mode flex justify-center" : ""
+									isPreviewMode ? "preview-mode flex justify-center py-4" : ""
 								}`}
 							>
 								<div
 									className={`${
 										isPreviewMode
-											? "transform transition-all duration-500 hover:scale-[1.01] shadow-xl"
+											? "transform transition-all duration-500 hover:scale-[1.02] shadow-xl"
 											: ""
 									}`}
 								>
