@@ -140,6 +140,7 @@ function App() {
 	const [accentColor, setAccentColor] = useState("#60a5fa");
 	const [isPreviewMode, setIsPreviewMode] = useState(false);
 	const [isTwoColumn, setIsTwoColumn] = useState(true);
+	const [originalTemplate, setOriginalTemplate] = useState("modern");
 
 	const resumeRef = useRef();
 
@@ -198,6 +199,17 @@ function App() {
 		}
 	};
 
+	const toggleTwoColumnResume = () => {
+		if (activeTemplate === "two-column") {
+			// Switch back to the original template
+			setActiveTemplate(originalTemplate);
+		} else {
+			// Store current template and switch to two-column
+			setOriginalTemplate(activeTemplate);
+			setActiveTemplate("two-column");
+		}
+	};
+
 	return (
 		<div className="bg-secondary-100 min-h-screen flex flex-col font-sans">
 			<Header />
@@ -226,6 +238,24 @@ function App() {
 					)}
 
 					<div className="flex-grow"></div>
+
+					{isPreviewMode && (
+						<button
+							className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
+								activeTemplate === "two-column"
+									? "bg-primary-600 text-white shadow-md"
+									: "bg-white text-secondary-800 hover:bg-secondary-100"
+							}`}
+							onClick={toggleTwoColumnResume}
+						>
+							<i className="fas fa-columns"></i>
+							<span>
+								{activeTemplate === "two-column"
+									? "Standard Layout"
+									: "Two Column Layout"}
+							</span>
+						</button>
+					)}
 
 					<button
 						onClick={() => setIsPreviewMode(!isPreviewMode)}

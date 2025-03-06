@@ -17,19 +17,19 @@ const ResumePreview = forwardRef(({ data, headingColor = "#2563eb" }, ref) => {
 
 					<div className="mt-1 flex flex-wrap resume-details text-sm text-gray-600 leading-tight">
 						{data.personalInfo.email && (
-							<div className="mr-4 mb-2">
+							<div className="mr-4 ">
 								<span className="font-semibold">Email:</span>{" "}
 								{data.personalInfo.email}
 							</div>
 						)}
 						{data.personalInfo.phone && (
-							<div className="mr-4 mb-2">
+							<div className="mr-4 ">
 								<span className="font-semibold">Phone:</span>{" "}
 								{data.personalInfo.phone}
 							</div>
 						)}
 						{data.personalInfo.website && (
-							<div className="mr-4 mb-2">
+							<div className="mr-4  mb-2">
 								<span className="font-semibold">Website:</span>{" "}
 								{data.personalInfo.website}
 							</div>
