@@ -10,6 +10,13 @@ import {
 	MinimalTemplate,
 } from "./components/ResumePreview";
 import StyleControls from "./components/StyleControls";
+import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
+
+// Helper function to combine classes with tailwind-merge and clsx
+const cn = (...classes) => {
+	return twMerge(clsx(classes));
+};
 
 function App() {
 	const [resumeData, setResumeData] = useState({
@@ -141,6 +148,7 @@ function App() {
 	const [isPreviewMode, setIsPreviewMode] = useState(false);
 	const [isTwoColumn, setIsTwoColumn] = useState(true); // For layout of the editor
 	const [previousTemplate, setPreviousTemplate] = useState(null); // Store previous template when switching to two-column
+	const [isToggling, setIsToggling] = useState(false); // For toggle animation
 
 	const resumeRef = useRef();
 
@@ -217,36 +225,79 @@ function App() {
 		}
 	};
 
-	// This toggles the layout of the editor (form and preview side by side or stacked)
+	// Enhanced toggle function with animation
 	const toggleEditorLayout = () => {
-		setIsTwoColumn(!isTwoColumn);
+		setIsToggling(true);
+		setTimeout(() => {
+			setIsTwoColumn(!isTwoColumn);
+			setTimeout(() => {
+				setIsToggling(false);
+			}, 300);
+		}, 150);
 	};
 
 	return (
 		<div className="bg-secondary-100 min-h-screen flex flex-col font-sans">
 			<Header />
 
-			<div className="container mx-auto px-4 py-6 flex-grow flex flex-col">
+			<div
+				className={cn(
+					"container mx-auto px-4 py-6 flex-grow flex flex-col",
+					isPreviewMode && "items-center justify-center"
+				)}
+			>
 				{/* Action Buttons */}
-				<div className="flex flex-wrap gap-3 mb-6">
+				<div className="flex flex-wrap gap-3 mb-6 w-full">
 					{!isPreviewMode && (
 						<>
 							<button
-								className={`flex items-center space-x-2 px-4 py-2 rounded-md transition-all duration-200 ${
+								className={cn(
+									"flex items-center gap-3 px-4 py-2 rounded-full transition-all duration-300",
 									isTwoColumn
-										? "bg-primary-600 text-white shadow-md"
-										: "bg-white text-secondary-800 hover:bg-secondary-100"
-								}`}
+										? "bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg"
+										: "bg-white text-secondary-800 hover:shadow-md border border-secondary-200",
+									isToggling && "scale-95 opacity-80"
+								)}
 								onClick={toggleEditorLayout}
+								disabled={isToggling}
 							>
-								<i
-									className={`fas fa-${
-										isTwoColumn ? "columns" : "align-justify"
-									}`}
-								></i>
-								<span>
-									{isTwoColumn ? "Single Column Editor" : "Two Column Editor"}
+								<div className="relative">
+									<span
+										className={cn(
+											"flex items-center justify-center h-6 w-6 rounded-full transition-all duration-300",
+											isTwoColumn
+												? "bg-white text-primary-600"
+												: "bg-primary-100 text-primary-700"
+										)}
+									>
+										<i
+											className={cn(
+												"fas",
+												isTwoColumn ? "fa-columns" : "fa-align-justify",
+												"text-sm"
+											)}
+										></i>
+									</span>
+									<span
+										className={cn(
+											"absolute top-0 right-0 h-2 w-2 rounded-full transition-all duration-300",
+											isToggling
+												? "bg-yellow-400"
+												: isTwoColumn
+												? "bg-green-400"
+												: "bg-blue-400"
+										)}
+									></span>
+								</div>
+								<span className="font-medium whitespace-nowrap">
+									{isTwoColumn ? "Side-by-Side View" : "Stacked View"}
 								</span>
+								<i
+									className={cn(
+										"fas fa-chevron-right text-xs transform transition-transform duration-300",
+										isTwoColumn && "rotate-90"
+									)}
+								></i>
 							</button>
 						</>
 					)}
@@ -288,16 +339,21 @@ function App() {
 
 				{/* Main Content */}
 				<div
-					className={`flex ${
-						isTwoColumn && !isPreviewMode ? "flex-col md:flex-row" : "flex-col"
-					} gap-8 flex-grow ${isPreviewMode ? "justify-center" : ""}`}
+					className={cn(
+						isPreviewMode
+							? "flex flex-col items-center justify-center w-full transition-all duration-500 py-8"
+							: "flex gap-8 flex-grow transition-all duration-300",
+						!isPreviewMode && isTwoColumn ? "flex-col md:flex-row" : "flex-col",
+						isToggling && "opacity-50 scale-98"
+					)}
 				>
 					{/* Form Panel */}
 					{!isPreviewMode && (
 						<div
-							className={`${
+							className={cn(
+								"animate-fade scroll-container",
 								isTwoColumn ? "w-full md:w-1/2" : "w-full"
-							} animate-fade scroll-container`}
+							)}
 						>
 							<ResumeForm data={resumeData} updateData={updateResumeData} />
 						</div>
@@ -305,15 +361,20 @@ function App() {
 
 					{/* Preview Panel */}
 					<div
-						className={`${
+						className={cn(
 							isPreviewMode
-								? "w-full max-w-[21cm]"
+								? "w-full max-w-[21cm] flex justify-center"
 								: isTwoColumn
 								? "w-full md:w-1/2"
-								: "w-full"
-						} animate-fade`}
+								: "w-full",
+							"animate-fade"
+						)}
 					>
-						<div className={`${isPreviewMode ? "" : "sticky top-24"}`}>
+						<div
+							className={`${
+								isPreviewMode ? "w-full max-w-[21cm]" : "sticky top-24 w-full"
+							}`}
+						>
 							{!isPreviewMode && (
 								<StyleControls
 									headingColor={headingColor}
@@ -323,15 +384,23 @@ function App() {
 							)}
 							<div
 								className={`scroll-container ${
-									isPreviewMode ? "preview-mode" : ""
+									isPreviewMode ? "preview-mode flex justify-center" : ""
 								}`}
 							>
-								{React.createElement(getTemplateComponent(activeTemplate), {
-									data: resumeData,
-									ref: resumeRef,
-									headingColor: headingColor,
-									accentColor: accentColor,
-								})}
+								<div
+									className={`${
+										isPreviewMode
+											? "transform transition-all duration-500 hover:scale-[1.01] shadow-xl"
+											: ""
+									}`}
+								>
+									{React.createElement(getTemplateComponent(activeTemplate), {
+										data: resumeData,
+										ref: resumeRef,
+										headingColor: headingColor,
+										accentColor: accentColor,
+									})}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -339,7 +408,12 @@ function App() {
 			</div>
 
 			{/* Footer */}
-			<footer className="bg-secondary-800 text-secondary-200 py-4 mt-10">
+			<footer
+				className={cn(
+					"bg-secondary-800 text-secondary-200 py-4",
+					!isPreviewMode && "mt-10"
+				)}
+			>
 				<div className="container mx-auto px-4 text-center">
 					<p>© 2023 ResumeForge. Build your professional resume in minutes.</p>
 				</div>
