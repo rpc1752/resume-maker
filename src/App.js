@@ -42,44 +42,98 @@ function App() {
 		],
 		experience: [
 			{
-				position: "Senior Full Stack Developer & Team Lead",
+				position: "Senior Full Stack Developer & Tech Lead",
 				company: "TechInnovate Solutions",
 				duration: "2020 - Present",
 				description:
-					"Spearheaded the development of a revolutionary CRM platform serving 100+ enterprise clients. Architected microservices infrastructure that handles 1M+ daily transactions. Reduced system downtime by 99% through implementing advanced monitoring and auto-scaling solutions. Mentored 8 junior developers, with 3 receiving promotions within their first year.",
+					"Led development of an AI-powered CRM platform that drove $5M in annual revenue. Scaled architecture to handle 2M+ daily users with 99.99% uptime. Pioneered implementation of GraphQL/Apollo federation reducing API response times by 85%. Mentored team of 12 developers across 3 continents, achieving 40% improvement in sprint velocity.",
 			},
 			{
-				position: "Full Stack Developer",
+				position: "Lead Frontend Developer",
 				company: "DataViz Corp",
 				duration: "2018 - 2020",
 				description:
-					"Revolutionized the company's data visualization platform using React and D3.js, resulting in a 200% increase in user engagement. Implemented advanced caching strategies that reduced average page load time from 3s to 300ms. Created a component library that reduced development time for new features by 60%. Successfully migrated legacy system to modern tech stack while maintaining 100% uptime.",
+					"Architected real-time analytics dashboard processing 500K+ events/second. Built custom visualization library saving $200K in licensing costs. Reduced page load time from 5s to 200ms through advanced caching and code-splitting. Drove adoption of TypeScript and unit testing, reducing production bugs by 70%.",
 			},
 			{
-				position: "Web Development Intern",
+				position: "Full Stack Innovation Intern",
 				company: "StartUp Innovations",
 				duration: "Summer 2017",
 				description:
-					"Developed key features for the company's flagship product using React and Node.js. Created an automated testing framework that reduced QA time by 40%. Contributed to the successful launch of 3 major product features that increased user retention by 25%.",
+					"Developed AI-powered feature recommendations engine increasing user engagement by 45%. Implemented automated E2E testing reducing QA cycles by 60%. Created developer documentation portal praised by engineering team.",
 			},
 		],
 		skills: [
-			"JavaScript/TypeScript",
-			"React/Next.js",
-			"Node.js/Express",
-			"System Architecture",
-			"AWS/Cloud Infrastructure",
-			"MongoDB/PostgreSQL",
-			"Docker/Kubernetes",
-			"CI/CD Pipeline Design",
+			"Advanced JavaScript/TypeScript",
+			"React/Next.js Expert",
+			"Node.js/GraphQL",
+			"Cloud Architecture (AWS/GCP)",
+			"Microservices Design",
+			"System Scalability",
+			"CI/CD & DevOps",
 			"Team Leadership",
+			"Agile/Scrum Master",
 			"Performance Optimization",
-			"Microservices",
-			"Security Best Practices",
+			"Security & Authentication",
+			"Technical Mentorship",
 		],
-		projects: [],
-		certifications: [],
-		languages: [],
+		projects: [
+			{
+				name: "ScaleStack Pro",
+				description:
+					"Open-source cloud infrastructure automation tool with 2K+ GitHub stars. Reduces AWS deployment time by 80% using custom IaC templates.",
+				technologies: ["Terraform", "Go", "React", "AWS"],
+				link: "github.com/alexj/scalestack",
+			},
+			{
+				name: "DevMetrics Dashboard",
+				description:
+					"Real-time engineering productivity analytics platform used by 50+ dev teams. Featured in TechCrunch.",
+				technologies: ["Next.js", "GraphQL", "MongoDB", "D3.js"],
+				link: "devmetrics.io",
+			},
+			{
+				name: "ML-Ops Pipeline",
+				description:
+					"Automated machine learning deployment pipeline reducing model deployment time from weeks to hours.",
+				technologies: ["Python", "Kubernetes", "TensorFlow", "CI/CD"],
+				link: "github.com/alexj/mlops",
+			},
+		],
+		certifications: [
+			{
+				name: "AWS Solutions Architect Professional",
+				issuer: "Amazon Web Services",
+				date: "2023",
+				credential: "AWS-PSA-2023",
+			},
+			{
+				name: "Google Cloud Professional Architect",
+				issuer: "Google Cloud",
+				date: "2022",
+				credential: "GCP-PA-2022",
+			},
+			{
+				name: "Kubernetes Security Specialist",
+				issuer: "Linux Foundation",
+				date: "2021",
+				credential: "CKS-2021",
+			},
+		],
+		languages: [
+			{
+				language: "English",
+				proficiency: "Native",
+			},
+			{
+				language: "Spanish",
+				proficiency: "Professional Working",
+			},
+			{
+				language: "Mandarin",
+				proficiency: "Conversational",
+			},
+		],
 	});
 
 	const [activeTemplate, setActiveTemplate] = useState("modern");
