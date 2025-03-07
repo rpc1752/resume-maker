@@ -128,6 +128,8 @@ body {
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
+		width: 100%;
+		overflow-x: hidden;
 	}
 
 	.preview-mode .resume-page {
@@ -135,10 +137,55 @@ body {
 		box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15),
 			0 4px 6px -1px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		max-width: 100%;
 	}
 
-	.preview-mode .resume-page:hover {
-		box-shadow: 0 12px 24px -2px rgba(0, 0, 0, 0.2),
-			0 6px 10px -1px rgba(0, 0, 0, 0.12);
+	/* Mobile preview mode adjustments */
+	@media (max-width: 768px) {
+		.scroll-container.preview-mode {
+			padding: 1rem;
+		}
+
+		.preview-mode .resume-page {
+			margin: 0.5rem auto;
+			transform: scale(0.9);
+			transform-origin: top center;
+			width: 100%;
+			padding: 1cm;
+		}
+
+		/* Adjust font sizes for better mobile readability */
+		.resume-page {
+			font-size: 14px;
+		}
+
+		.resume-page h1 {
+			font-size: 1.5rem;
+		}
+
+		.resume-page h2 {
+			font-size: 1.25rem;
+		}
+
+		.resume-page h3 {
+			font-size: 1.1rem;
+		}
+
+		.resume-page p,
+		.resume-page span {
+			font-size: 0.9rem;
+		}
+	}
+
+	/* Tablet preview mode adjustments */
+	@media (min-width: 769px) and (max-width: 1024px) {
+		.scroll-container.preview-mode {
+			padding: 1.5rem;
+		}
+
+		.preview-mode .resume-page {
+			transform: scale(0.95);
+			transform-origin: top center;
+		}
 	}
 }
